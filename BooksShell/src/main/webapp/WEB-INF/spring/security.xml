@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                    http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+                    http://www.springframework.org/schema/security 
+                    http://www.springframework.org/schema/security/spring-security-4.0.xsd">
+                    
+     <beans:import resource="classpath:/META-INF/appContext.xml"/>
+	
+	<!-- http тег виконує login та logout, перехоплює url, настроює кеш і т.д. -->
+	<http use-expressions="true" >
+		<!-- pattern - шаблон URL`ок, які будуть перехоплюватись; access - метод, 
+			яким вони будуть перевірятись -->
+			<!-- principal -->
+		<intercept-url pattern="/" access="permitAll" />
+		<!-- <intercept-url pattern="/add*" access="isAuthenticated()" />
+		<intercept-url pattern="/show*" access="hasRole('ADMIN')" /> -->
+	
+<!-- 		Деактивує csrf фільтр  -->
+		<csrf disabled="false"/>
+		<!-- Описує процес логінування (login-page - URL сторінки логінування; 
+			login-processing-url - URL, яка здійснює логінування -->
+<!-- 		<form-login login-page="/loging" login-processing-url="/login" authentication-failure-url="/tologin?fail=true" default-target-url="/tologin" always-use-default-target="true"  /> -->
+
+
+	<form-login/>
+
+		<!-- Описує Logout процес (logout-url - URL, яка здійснює вихід користувача 
+			з сесії (якщо csrf не відключений, то повинен бути HTTP POST METHOD), logout-success-url 
+			- URL, по якій перейде програма після здійснення виходу -->
+		<logout logout-url="/logout" logout-success-url="/" />
+	</http>
+
+	<!-- Описує користувачів системи. -->
+	<authentication-manager>
+		<authentication-provider>
+		<!-- "Хардкодне" оголошення користувачів системи. -->
+			<user-service>
+				<user name="admin" password="admin" authorities="ROLE_ADMIN" />
+			</user-service>
+		</authentication-provider>
+		<authentication-provider user-service-ref="userService">
+		
+		</authentication-provider>
+	</authentication-manager>
+</beans:beans>
