@@ -23,6 +23,10 @@ public class AuthorDAOImp implements AuthorDAO{
 	public List<Author> getAllAuthors() {
 		return manager.createQuery("from Author",Author.class).getResultList();
 	}
+
+	public Author getAuthor(int id) {
+		return manager.find(Author.class, id);
+	}
 	
 	
 	

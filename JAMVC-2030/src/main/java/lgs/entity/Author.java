@@ -1,5 +1,6 @@
 package lgs.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -18,7 +19,7 @@ public class Author {
 	private int id;
 	private String name;
 	@ManyToMany(mappedBy="authors",fetch=FetchType.LAZY,cascade={CascadeType.PERSIST,CascadeType.MERGE})
-	private List<Book>books;
+	private List<Book>books=new ArrayList<Book>();
 	
 	public Author() {
 		// TODO Auto-generated constructor stub

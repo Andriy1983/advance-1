@@ -23,6 +23,10 @@ public class AuthorServiceImp implements AuthorService{
 	public List<Author> getAllAuthors() {
 		return authorDAO.getAllAuthors();
 	}
+
+	public Author getAuthor(int id) {
+		return authorDAO.getAuthor(id);
+	}
 	
 	
 
