@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+	<definition name="base.definition" template="/views/tiles/layout.jsp">
+		<put-attribute name="header" value="/views/tiles/header.jsp"></put-attribute>
+		<put-attribute name="footer" value="/views/tiles/footer.jsp"></put-attribute>
+		<put-attribute name="body" value=""></put-attribute>
+	</definition>
+
+
+
+	<definition name="author-*" extends="base.definition">
+		<put-attribute name="body" value="/views/author/{1}.jsp"></put-attribute>
+		<put-attribute name="title" value="Author {1}"></put-attribute>
+	</definition>
+
+	<definition name="book-*" extends="base.definition">
+		<put-attribute name="body" value="/views/book/{1}.jsp"></put-attribute>
+		<put-attribute name="title" value="Book {1}"></put-attribute>
+	</definition>
+	<definition name="home" extends="base.definition">
+		<put-attribute name="body" value="/home.jsp"></put-attribute>
+		<put-attribute name="title" value="HOME"></put-attribute>
+	</definition>
+	
+	<definition name="joinPage" extends="base.definition">
+		<put-attribute name="body" value="/join.jsp"></put-attribute>
+		<put-attribute name="title" value="HOME"></put-attribute>
+	</definition>
+	
+	<definition name="logMe" extends="base.definition">
+		<put-attribute name="body" value="/ploging.jsp"></put-attribute>
+		<put-attribute name="title" value="LOGIN"></put-attribute>
+	</definition>
+</tiles-definitions>

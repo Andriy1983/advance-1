@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
+
+	<bean class="org.apache.commons.dbcp.BasicDataSource" id="databseConfigure" >
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value="1111"></property>
+		<property name="url" value="jdbc:mysql://localhost/spring"></property>
+	</bean>
+
+
+	<!-- Вместо Sessiion Factory -->
+	
+	<!-- имя объекта -->
+	<bean class="org.springframework.orm.hibernate4.LocalSessionFactoryBean" id="factory" >  <!-- класс к которому он относиться -->
+		<!-- Поля -->
+		<!--  Данное поле ссілается на конкретный объект temp1. Он будет создан далее -->
+		<property name="dataSource" ref="databseConfigure"></property>
+		
+		<!-- Поля -->
+		<property name="annotatedClasses">
+			<list>
+				<value>aaa.aaa.entity.Author</value>
+				<value>aaa.aaa.entity.Book</value>
+			</list>
+		</property>
+		
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.show_sql">true</prop>
+			</props>
+
+		</property>
+	</bean>
+	
+	
+	<!-- объект для доступа в базу данных. factory использует его -->
+		
+	
+	
+	<bean  class="aaa.aaa.dao.AuthorDAO" id = "authorBean">
+		<property name="shmactory" ref="factory"></property>
+		
+	</bean>
+
+	<bean id="bookBean" class="aaa.aaa.dao.BookDAO">
+		<property name="factory" ref="factory"></property>
+	</bean>
+</beans>
