@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
+
+	<bean id="configure" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value="123456"></property>
+		<property name="url" value="jdbc:mysql://localhost/spring"></property>
+	</bean>
+
+	<bean class="org.springframework.orm.hibernate4.LocalSessionFactoryBean" id="factoryBean">
+		
+		<property name="dataSource" ref="configure"></property>
+
+		<property name="annotatedClasses">
+			<list>
+				<value>lgs.entity.Author</value>
+				<value>lgs.entity.Book</value>
+			</list>
+		</property>
+
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.show_sql">true</prop>
+			</props>
+
+		</property>
+	</bean>
+	
+	<bean class="lgs.dao.AuthorDAO" id="authorDAO">
+		<property name="factory" ref="factoryBean"></property>
+		
+	</bean>
+	
+	<bean class="lgs.dao.BookDAO" id="bookDAO">
+		<property name="factory" ref="factoryBean"></property>
+	</bean>
+ 
+
+
+
+
+
+
+</beans>
