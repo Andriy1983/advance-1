@@ -6,9 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import lgs.service.AuthorService;
-
 @Controller
-public class HomeController {
+public class HomeController { 
 	
 	@Autowired
 	private AuthorService authorService;
