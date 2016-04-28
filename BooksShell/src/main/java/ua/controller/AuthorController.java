@@ -2,9 +2,13 @@ package ua.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +23,17 @@ public class AuthorController {
 	@Autowired
 	AuthorService authorService;
 	
-
+//	@ModelAttribute("Author!!!") //будет передаваться каждой модельке на контроллере
+//	public Author author(){
+//		return authorService.authorServiceGetSingleAuthorByID(1);
+//		
+//	}
+	
+//	@InitBinder
+//	private void initBinred(WebDataBinder binder){
+//		
+//	}
+	
 	@RequestMapping(value="/show_all_authors")
 	public String show_all_authors(Model model){
 		List<Author> authors = authorService.authorServiceGetAllAuthors();
@@ -36,8 +50,9 @@ public class AuthorController {
 		return "author-addAuthor";
 	}
 	
+	
 	@RequestMapping(value="/addNewAuthor" , method=RequestMethod.POST)
-	public String addNewAuthor(@ModelAttribute(value="addAuthorModel")Author author){
+	public String addNewAuthor(@Valid@ModelAttribute(value="addAuthorModel")Author author){
 		
 		authorService.authorServiceSaveOrUpdateAuthor(String.valueOf(author.getId()),author.getName(), author.getSurname());
 		

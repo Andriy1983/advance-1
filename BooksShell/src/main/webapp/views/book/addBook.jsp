@@ -9,35 +9,53 @@
 <title>Insert title here</title>
 </head>
 <body>
-	
-<%-- 	<form:form modelAttribute="addBookModel" action="addNewBook" method="post"> --%>
-<%-- 		<form:input path="title"/> --%>
-<%-- 		<form:input path="description"/> --%>
-<%-- 		<form:input path="year"/> --%>
-<%-- 		<form:input path="authors"/> --%>		
-<%-- 	</form:form> --%>
 
-
-	
-	<form action="addNewBook" method="post">
-		<input type="hidden" value="${book.id}" name="id">
-		<input type="text" name="title" required value="${book.title}">
-		<br>
-		<textarea rows="5"  cols="5" name="description" required></textarea>
-		<br>
-		<input type="text" name="year" required>
-		<br>
-		
-		<select name="multiselect" multiple="multiple" size="5" required>
-			<c:forEach items="${authorsList}" var="author">
-				<option value="${author.id}">${author.name} ${author.surname}</option>
+	<form:form modelAttribute="BookModelAtribute" action="addNewBook"
+		method="post">
+		<br> 
+		<form:input type="hidden" path="id" />
+		<form:errors path="id"></form:errors>
+		<br> 
+		<form:errors path="title"></form:errors>
+		<form:input path="title" />
+		<br> 
+		<form:input path="description" />
+		<br> 
+		<form:input path="year" />
+		<br> 
+		<form:select path="authors">
+			<c:forEach items="${authors}" var="author">
+				<option value="${author.id}">
+					${author.name}
+					${author.surname}
+				</option>
 			</c:forEach>
-		
-		</select>
+		</form:select>
+		<br> 
 		<input type="submit">
-		<input type="hidden"
-			name="${_csrf.parameterName}" value="${_csrf.token}" />
-	</form>
+	</form:form>
+
+
+
+	<%-- 	<form action="addNewBook" method="post"> --%>
+<%-- 		<input type="hidden" value="${book.id}" name="id"> --%>
+<%-- 		<input type="text" name="title" required value="${book.title}"> --%>
+<!-- 		<br> -->
+<!-- 		<textarea rows="5"  cols="5" name="description" required></textarea> -->
+<!-- 		<br> -->
+<!-- 		<input type="text" name="year" required> -->
+<!-- 		<br> -->
+		
+<!-- 		<select name="multiselect" multiple="multiple" size="5" required> -->
+<%-- 			<c:forEach items="${authorsList}" var="author"> --%>
+<%-- 				<option value="${author.id}">${author.name} ${author.surname}</option> --%>
+<%-- 			</c:forEach> --%>
+		
+<!-- 		</select> -->
+<!-- 		<input type="submit"> -->
+<!-- 		<input type="hidden" -->
+<%-- 			name="${_csrf.parameterName}" value="${_csrf.token}" /> --%>
+<%-- 	</form> --%>
 
 
 </body>
