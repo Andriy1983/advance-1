@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<!-- tiles definition - опис атрибутів веб сторінок -->
+<tiles-definitions>
+	
+	<definition name="base.definition" template="/view/tiles/base/layout.jsp">
+		<put-attribute name="header" value="/view/tiles/base/header.jsp"></put-attribute>
+		<put-attribute name="body" value="/view/tiles/base/body.jsp"></put-attribute>
+		<put-attribute name="footer" value="/view/tiles/base/footer.jsp"></put-attribute>
+	</definition>
+
+<!-- 				  author-allAuthors -->
+	<definition name="author-*" extends="base.definition">
+<!-- 											         allAuthors -->
+		<put-attribute name="body" value="/view/tiles/all/{1}.jsp"></put-attribute>
+		<put-attribute name="asd" value="Author {1}"></put-attribute>
+	</definition>
+</tiles-definitions>
